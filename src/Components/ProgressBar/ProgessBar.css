@@ -1,0 +1,20 @@
+.svg {
+  position: relative;
+  top: 55px;
+  left: 25%;
+}
+
+.svg-circle-bg {
+  fill: none;
+}
+
+.svg-circle {
+  fill: none;
+}
+
+.svg-circle-text {
+  font-size: 2rem;
+  text-anchor: middle;
+  fill: #fff;
+  font-weight: bold;
+}

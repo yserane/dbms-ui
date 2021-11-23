@@ -1,38 +1,58 @@
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+  background-color: #282c34;
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  text-align: center;
+
+  min-height: 10vh;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  font-size: calc(20px + 2vmin);
   color: white;
+  font-weight: bold;
+  padding-top: 40px;
+  margin-bottom: 40px;
+}
+.p-text {
+  color: #1281de;
+}
+.card-style {
+  height: 50vh;
+  padding: 30px;
+  margin-top: 40px;
 }
 
-.App-link {
-  color: #61dafb;
+table {
+  color: white;
+  padding: 56px;
+  font-size: 21px;
+  border: 1px solid #eee;
+  margin-left: auto;
+  margin-right: auto;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+td {
+  border-bottom: 1px solid #eee;
+  padding: 20px;
+}
+UsabilityTable {
+  margin-top: 5px;
+}
+.arrow-back {
+  -moz-transform: scale(-1, 1);
+  -webkit-transform: scale(-1, 1);
+  -o-transform: scale(-1, 1);
+  -ms-transform: scale(-1, 1);
+  transform: scale(-1, 1);
+  margin-top: 19px;
+  cursor: pointer;
+  font-size: 36px;
+}
+.card-style-res {
+  height: 20vh;
+  padding: 30px;
+  margin-top: 40px;
+}
+.apexcharts-legend-text {
+  color: white !important;
 }
