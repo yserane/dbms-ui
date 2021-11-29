@@ -178,25 +178,25 @@ class Survey extends React.Component{
               direction="row"> 
               {this.state.researchers.map((res) => {
                     return (
-                      <Grid key = {res[0]._id.$oid} item xs={4}>
+                      <Grid key = {res.result[0]._id.$oid} item xs={4}>
                     <Card   className= "card-style-res">
                         <CardActionArea>
                           <CardContent>
                             <Typography gutterBottom variant="h5" component="div">
-                             {this.updateName(res[0].r_name)}
+                             {this.updateName(res.result[0].r_name)}
                             </Typography>
                             <Typography variant="body2" color="text.secondary">
-                            Gender: {res[0].gender}
+                            Gender: {res.result[0].gender}
                             </Typography>
                             <Typography variant="body2" color="text.secondary">
                             Observer
-                            {res[0].is_observer? <FcCheckmark/>: <HiXCircle color = "red"/>}
+                            {res.result[0].is_observer? <FcCheckmark/>: <HiXCircle color = "red"/>}
                             </Typography>
                             <Typography variant="body2" color="text.secondary">
-                            DOB: {new Date(parseInt(res[0]['DOB'].$date.$numberLong)).toString()}
+                            DOB: {new Date(parseInt(res.result[0]['DOB'].$date.$numberLong)).toString()}
                             </Typography>
                             <Typography variant="body2" color="text.secondary">
-                            Years of Experience: {res[0]['Years Experience'].$numberInt}
+                            Years of Experience: {res.result[0]['Years Experience'].$numberInt}
                             </Typography>
                           </CardContent>
                         </CardActionArea>
