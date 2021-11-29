@@ -50,10 +50,10 @@ class Survey extends React.Component{
       prepareChart(data){
         var vals = {};
         data.map((par)=>{
-          if (vals[parseInt(par.age.$numberInt)]) {
-            vals[parseInt(par.age.$numberInt)] = vals[parseInt(par.age.$numberInt)]+1;
+          if (vals[parseInt(par.result[0].age.$numberInt)]) {
+            vals[parseInt(par.result[0].age.$numberInt)] = vals[parseInt(par.result[0].age.$numberInt)]+1;
           } else {
-            vals[parseInt(par.age.$numberInt)] = 1;
+            vals[parseInt(par.result[0].age.$numberInt)] = 1;
           }
         });
         this.setState({ages : Object.keys(vals)});
@@ -230,24 +230,24 @@ class Survey extends React.Component{
               direction="row"> 
               {this.state.participants.map((res) => {
                     return (
-                    <Grid  key = {res._id.$oid} item xs={4}>
+                    <Grid  key = {res.result[0]._id.$oid} item xs={4}>
                     <Card  className= "card-style-res">
                         <CardActionArea>
                           <CardContent>
                             <Typography gutterBottom variant="h5" component="div">
-                             {res.name}
+                             {res.result[0].name}
                             </Typography>
                             <Typography variant="body2" color="text.secondary">
-                            Gender: {res.gender}
+                            Gender: {res.result[0].gender}
                             </Typography>
                             <Typography variant="body2" color="text.secondary">
-                            Age: {res.age.$numberInt}
+                            Age: {res.result[0].age.$numberInt}
                             </Typography>
                             <Typography variant="body2" color="text.secondary">
-                            Age: {res.race}
+                            Age: {res.result[0].race}
                             </Typography>
                             <Typography variant="body2" color="text.secondary">
-                            Location: {res.street +" "+ res.city +" "+ res.zipCode }
+                            Location: {res.result[0].street +" "+ res.result[0].city +" "+ res.result[0].zipCode }
                             </Typography>
                           </CardContent>
                         </CardActionArea>
