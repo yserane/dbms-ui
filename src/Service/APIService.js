@@ -29,3 +29,10 @@ export function getProductList() {
 
   }
 
+  export function getChartData(uId){
+    return fetch('https://us-east-1.aws.webhooks.mongodb-realm.com/api/client/v2.0/app/dbms-aiwpy/service/getParticipants/incoming_webhook/participantsAge?secret=root&uID='+uId)
+    .then(data => data.json());
+
+  }
+
+

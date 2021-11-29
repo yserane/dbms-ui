@@ -1,5 +1,5 @@
 import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
-import {getSurveys , getSurveyTasks, getResearcher, getParticipants} from '../../Service/APIService'
+import {getSurveys , getSurveyTasks, getResearcher, getParticipants, getChartData} from '../../Service/APIService'
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -20,6 +20,7 @@ class Survey extends React.Component{
         console.log(props);
         this.state = {
           infoList : [],
+          chartList:[],
           taskList:[],
           researchers:[],
           participants:[],
@@ -27,47 +28,46 @@ class Survey extends React.Component{
           isLoadedTask: false,
           isLoadResearcher: false,
           isLoadedPar: false,
+          isLoadedchartList: false,
           uId: this.props.match.params.uId,
           ages: [],
           values:[]  
         };
     }
-
-
     componentDidMount(){
         this.getInfoList();
         this.getTasksList();
         this.getResearcherList();
         this.getParticipantsList();
+        this.getChartInfo();
       }
 
       getParticipantsList(){
         getParticipants(this.state.uId).then(data => {
-          this.prepareChart(data);
+          this.setState({participants:data, isLoadedPar: true});
         });
       }
 
       prepareChart(data){
         var vals = {};
         data.map((par)=>{
-          if (vals[parseInt(par.result[0].age.$numberInt)]) {
-            vals[parseInt(par.result[0].age.$numberInt)] = vals[parseInt(par.result[0].age.$numberInt)]+1;
-          } else {
-            vals[parseInt(par.result[0].age.$numberInt)] = 1;
-          }
-        });
+            vals[parseInt(par._id[0].$numberInt)] = par.total.$numberLong;
+          });
         this.setState({ages : Object.keys(vals)});
         console.log("ages = "+ this.state.ages);
         this.setState({values : Object.values(vals)});
         console.log("values = "+ this.state.values);
-
-        this.setState({participants:data, isLoadedPar: true});
+        this.setchartList(data);
 
       }
 
       setInfoList(data){
         this.setState({infoList: data, isLoaded:true});  
       }
+      setchartList(data){
+        this.setState({chartList: data, isLoadedchartList:true});  
+      }
+      
       getResearcherList(){
         getResearcher(this.state.uId).then(data => {
           this.setState({researchers: data, isLoadResearcher:true});
@@ -83,6 +83,12 @@ class Survey extends React.Component{
         getSurveys(this.state.uId).then(data => {
           this.setInfoList(data);
         })
+      }
+
+      getChartInfo(){
+        getChartData(this.state.uId).then(data => {
+          this.prepareChart(data);
+        });
       }
       updateName(name) {
         var i=1;
