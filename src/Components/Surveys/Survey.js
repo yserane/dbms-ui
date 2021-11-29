@@ -19,7 +19,7 @@ class Survey extends React.Component{
         super(props);
         console.log(props);
         this.state = {
-          infoList : {},
+          infoList : [],
           taskList:[],
           researchers:[],
           participants:[],
@@ -81,7 +81,7 @@ class Survey extends React.Component{
       }
       getInfoList(){
         getSurveys(this.state.uId).then(data => {
-          this.setInfoList(data[0]);
+          this.setInfoList(data);
         })
       }
       updateName(name) {
@@ -100,11 +100,11 @@ class Survey extends React.Component{
         return (
           this.state.isLoaded && this.state.isLoadedTask && this.state.isLoadResearcher && this.state.isLoadedPar?  
                <div> 
-                  { !this.state.infoList.res || this.state.infoList.questionObj.length ==0 ? null:
+                  { this.state.infoList.length ==0 ? null:
                   <div>
                                     <h1 className="App-header">Survey 
                                     <ProgressBar 
-                                      progress={parseInt(this.state.infoList.res.score.$numberInt)}
+                                      progress={parseInt(this.state.infoList[0].resultSurvey[0].score.$numberInt)}
                                       size={100}
                                       strokeWidth={15}
                                       circleOneStroke='#d9edfe'
@@ -118,14 +118,14 @@ class Survey extends React.Component{
                                 </tr>
                               </MDBTableHead>
                                 <MDBTableBody >
-                                    {this.state.infoList.questionObj.map((question) => {
+                                    {this.state.infoList.map((question) => {
                                       return (
-                                        <tr key = {question._id.$oid} index={question._id.$oid}>
+                                        <tr key = {question.result[0]._id.$oid} index={question.result[0]._id.$oid}>
                                           <td>
-                                            {question.description}
+                                            {question.result[0].description}
                                           </td>
                                           <td>
-                                            {question.question_score? question.question_score.$numberInt: Math.floor(Math.random() * 10).toString()}
+                                            {question.result[0].question_score? question.result[0].question_score.$numberInt: Math.floor(Math.random() * 10).toString()}
                                           </td>
                                         </tr>
                                       )})}                                 
